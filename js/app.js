@@ -150,6 +150,7 @@
     initQuizzes();
     initReadingProgress();
     initTOC();
+    initMockTest();
 
     document.getElementById("sideSubscribe").addEventListener("submit", e => {
       e.preventDefault();
@@ -285,6 +286,70 @@
       });
     }, { rootMargin: "-80px 0px -60% 0px" });
     secs.forEach(s => s && obs.observe(s));
+  }
+
+  /* ---------- full mock test (Generative AI certification) ---------- */
+  function initMockTest() {
+    const box = document.getElementById("mocktest");
+    if (!box || typeof GENAI_QUESTIONS === "undefined") return;
+    const total = GENAI_QUESTIONS.length;
+    let finished = false;
+
+    box.innerHTML = `
+      <div id="mockbar" style="position:sticky;top:64px;z-index:50;background:var(--navy);color:#fff;border-radius:12px;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 4px 14px rgba(0,0,0,.18);margin-bottom:22px">
+        <span id="mockCount" style="font-weight:600">Answered 0 / ${total}</span>
+        <span style="font-size:.85rem;opacity:.85">No time limit · Score at the end</span>
+        <button class="btn" id="mockFinish" style="background:#fff;color:var(--navy)">Finish &amp; score</button>
+      </div>
+      <div id="mockResult"></div>
+      ${GENAI_QUESTIONS.map((it, i) => `
+        <div class="quiz" data-mock="${i}">
+          <div class="q-head"><span>Question ${i + 1} of ${total}</span><span>${it.p}</span></div>
+          <div class="q-body">
+            <p class="q-text">${it.q}</p>
+            ${it.o.map((o, j) => `<label class="opt"><input type="radio" name="mq${i}" value="${j}"> ${o}</label>`).join("")}
+          </div>
+          <div class="q-explain"><b>Answer: ${"ABCD"[it.a]} —</b> ${it.o[it.a]}<br><span style="color:var(--muted);font-size:.92em">${it.w || ""}</span></div>
+        </div>`).join("")}`;
+
+    const countEl = document.getElementById("mockCount");
+    const updateCount = () => {
+      const n = box.querySelectorAll("input[type=radio]:checked").length;
+      countEl.textContent = `Answered ${n} / ${total}`;
+    };
+    box.addEventListener("change", updateCount);
+
+    document.getElementById("mockFinish").addEventListener("click", () => {
+      if (finished) return;
+      finished = true;
+      let score = 0, answered = 0;
+      box.querySelectorAll("[data-mock]").forEach((quiz, i) => {
+        const it = GENAI_QUESTIONS[i];
+        const picked = quiz.querySelector("input[type=radio]:checked");
+        quiz.querySelector(".q-explain").classList.add("show");
+        quiz.querySelectorAll(".opt").forEach((o, j) => {
+          if (j === it.a) o.classList.add("correct");
+        });
+        if (picked) {
+          answered++;
+          const j = Number(picked.value);
+          if (j === it.a) { score++; }
+          else picked.closest(".opt").classList.add("wrong");
+        }
+      });
+      const pct = Math.round(score / total * 100);
+      const verdict = pct >= 70 ? (pct >= 85 ? "Excellent — you're exam-ready!" : "Pass — solid preparation.") : "Below 70% — revisit the weak parts and retake.";
+      const color = pct >= 70 ? "var(--green)" : "#c53030";
+      document.getElementById("mockResult").innerHTML = `
+        <div style="background:#fff;border:2px solid ${color};border-radius:14px;padding:22px 26px;margin-bottom:24px;text-align:center">
+          <div style="font-size:2.4rem;font-weight:800;color:${color}">${score} / ${total} (${pct}%)</div>
+          <div style="font-weight:600;color:var(--navy);margin-top:6px">${verdict}</div>
+          <div style="color:var(--muted);font-size:.9rem;margin-top:4px">Answered ${answered} of ${total} · Correct answers highlighted below</div>
+        </div>`;
+      document.getElementById("mockFinish").disabled = true;
+      document.getElementById("mockFinish").textContent = "Scored ✓";
+      window.scrollTo({ top: box.offsetTop - 80, behavior: "smooth" });
+    });
   }
 
   /* ---------- router ---------- */
