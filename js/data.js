@@ -714,14 +714,52 @@ git diff --staged       # staged vs last commit</code></pre>
         </ul>` },
       { h: "How to use this mock test", body: `
         <p>Answer all 125 questions at your own pace (suggested 90 minutes), then hit <b>Finish &amp; score</b>. You'll get your percentage, a pass/fail verdict, and every correct answer with an explanation so you can review your misses. Aim for 85%+ before sitting the real exam.</p>` },
-      { h: "Full mock test (122 questions)", body: `
-        <div id="mocktest"></div>` },
+      { h: "Full mock test (125 questions)", body: `
+        <div id="mocktest" data-bank="GENAI_QUESTIONS"></div>` },
       { h: "Final preparation checklist", body: `
         <ul>
           <li>Retake this mock test until you score 85%+ twice in a row</li>
           <li>Review the <i>Ethics in the Age of Generative AI</i> course — it covers the largest share of scenario questions</li>
           <li>Know the Copilot specifics cold: Summary in Outlook, 'Draft with Copilot' in Word, OneDrive/SharePoint requirement in Excel, Work/Web tabs for licensing</li>
           <li>The real exam rewords scenarios — if an answer here feels memorized, re-read the explanation until the concept is clear</li>
+        </ul>` }
+    ]
+  },
+  {
+    slug: "lean-six-sigma-sustainability-mock-test",
+    title: "Lean Six Sigma & Sustainability (LinkedIn Learning): Mock Test",
+    category: "Lean Six Sigma",
+    icon: "L6",
+    gradient: "linear-gradient(135deg,#2f855a,#68d391)",
+    date: "Sep 27, 2026",
+    readTime: "10 min read",
+    excerpt: "15 real quiz questions from LinkedIn Learning's Lean Six Sigma and Sustainability courses — 5-Whys, PDCA, DOWNTIME waste, stakeholder engagement, and the triple contexts of sustainability — with verified answer keys and explanations.",
+    intro: "LinkedIn Learning's process-improvement and sustainability courses (Lean Six Sigma fundamentals, continuous improvement, and sustainability strategy) end each chapter with short quizzes that many learners find trickier than expected. This mock test collects 15 real questions from those quizzes — with the answer keys verified against LinkedIn's own graded results — into one interactive practice test.",
+    sections: [
+      { h: "How these quizzes work", body: `
+        <ul>
+          <li><b>Format:</b> multiple choice, one best answer per question</li>
+          <li><b>Length:</b> short chapter quizzes (typically 10 questions each); this mock test combines the highest-value questions</li>
+          <li><b>Trap to watch:</b> several questions ask which option is <i>NOT</i> correct — read carefully</li>
+          <li><b>Course quirks:</b> two questions have answer keys that differ from common textbook knowledge (sustainability contexts; the grand challenges list) — we flag both in the explanations so you pass the quiz <i>and</i> learn the real-world facts</li>
+        </ul>` },
+      { h: "Topics covered", body: `
+        <ul>
+          <li><b>Root cause analysis</b> — the 5-Whys technique</li>
+          <li><b>Lean fundamentals</b> — gemba, continuous improvement, visual management, and the DOWNTIME wastes</li>
+          <li><b>PDCA cycle</b> — Plan-Do-Check-Act for continuous improvement</li>
+          <li><b>Lean Six Sigma goal</b> — process improvement, defect reduction, waste minimization</li>
+          <li><b>Sustainability</b> — project goals and charters, stakeholder engagement and communication, the three contexts of sustainability, global interconnection, and the 14 grand challenges for engineering</li>
+        </ul>` },
+      { h: "How to use this mock test", body: `
+        <p>Answer all 15 questions, then hit <b>Finish &amp; score</b>. You'll get your score, a pass/fail verdict, and every correct answer with an explanation. Aim for 100% — the question set is small enough to master completely.</p>` },
+      { h: "Mock test (15 questions)", body: `
+        <div id="mocktest-lean" data-bank="LEAN_QUESTIONS"></div>` },
+      { h: "Final preparation checklist", body: `
+        <ul>
+          <li>Memorize the DOWNTIME wastes — Defects, Overproduction, Waiting, Non-utilized talent, Transportation, Inventory, Motion, Extra-processing</li>
+          <li>Remember the two course-specific answer keys flagged in the explanations — they override textbook knowledge on this quiz</li>
+          <li>On "which is NOT" questions, eliminate the three true statements first</li>
         </ul>` }
     ]
   }
